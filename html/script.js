@@ -316,9 +316,9 @@ QBClothing.ToggleChange = function(bool) {
     canChange = bool;
 }
 
-$(document).ready(function(){
+$(document).ready(function() {
     window.addEventListener('message', function(event) {
-        switch(event.data.action) {
+        switch (event.data.action) {
             case "open":
                 QBClothing.Open(event.data);
                 break;
@@ -343,11 +343,11 @@ $(document).ready(function(){
 
 QBClothing.ReloadOutfits = function(outfits) {
     $(".clothing-menu-myOutfits-container").html("");
-    $.each(outfits, function(index, outfit){
-        var elem = '<div class="clothing-menu-option" data-myOutfit="'+(index + 1)+'"> <div class="clothing-menu-option-header"><p>'+outfit.outfitname+'</p></div><div class="clothing-menu-myOutfit-option-button"><p>Välj</p></div><div class="clothing-menu-myOutfit-option-button-remove"><p>Radera</p></div></div>'
+    $.each(outfits, function(index, outfit) {
+        var elem = '<div class="clothing-menu-option" data-myOutfit="' + (index + 1) + '"> <div class="clothing-menu-option-header"><p>' + outfit.outfitname + '</p></div><div class="clothing-menu-myOutfit-option-button"><p>Select</p></div><div class="clothing-menu-myOutfit-option-button-remove"><p>Delete</p></div></div>'
         $(".clothing-menu-myOutfits-container").append(elem)
-        
-        $("[data-myOutfit='"+(index + 1)+"']").data('myOutfitData', outfit)
+
+        $("[data-myOutfit='" + (index + 1) + "']").data('myOutfitData', outfit)
     });
 }
 
@@ -425,20 +425,20 @@ QBClothing.Open = function(data) {
         
 
         if (menu.menu == "roomOutfits") {
-            $.each(menu.outfits, function(index, outfit){
-                var elem = '<div class="clothing-menu-option" data-outfit="'+(index + 1)+'"> <div class="clothing-menu-option-header"><p>'+outfit.outfitLabel+'</p></div> <div class="clothing-menu-outfit-option-button"><p>Select Outfit</p></div> </div>'
+            $.each(menu.outfits, function(index, outfit) {
+                var elem = '<div class="clothing-menu-option" data-outfit="' + (index + 1) + '"> <div class="clothing-menu-option-header"><p>' + outfit.outfitLabel + '</p></div> <div class="clothing-menu-outfit-option-button"><p>Select Outfit</p></div> </div>'
                 $(".clothing-menu-roomOutfits-container").append(elem)
-                
-                $("[data-outfit='"+(index + 1)+"']").data('outfitData', outfit)
+
+                $("[data-outfit='" + (index + 1) + "']").data('outfitData', outfit)
             });
         }
 
         if (menu.menu == "myOutfits") {
-            $.each(menu.outfits, function(index, outfit){
-                var elem = '<div class="clothing-menu-option" data-myOutfit="'+(index + 1)+'"> <div class="clothing-menu-option-header"><p>'+outfit.outfitname+'</p></div><div class="clothing-menu-myOutfit-option-button"><p>Välj</p></div><div class="clothing-menu-myOutfit-option-button-remove"><p>Radera</p></div></div>'
+            $.each(menu.outfits, function(index, outfit) {
+                var elem = '<div class="clothing-menu-option" data-myOutfit="' + (index + 1) + '"> <div class="clothing-menu-option-header"><p>' + outfit.outfitname + '</p></div><div class="clothing-menu-myOutfit-option-button"><p>Select</p></div><div class="clothing-menu-myOutfit-option-button-remove"><p>Delete</p></div></div>'
                 $(".clothing-menu-myOutfits-container").append(elem)
-                
-                $("[data-myOutfit='"+(index + 1)+"']").data('myOutfitData', outfit)
+
+                $("[data-myOutfit='" + (index + 1) + "']").data('myOutfitData', outfit)
             });
         }
     });

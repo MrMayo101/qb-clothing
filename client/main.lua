@@ -481,7 +481,6 @@ else
             })
         end
 
-
         local clothingCombo = ComboZone:Create(zones, {name = "clothingCombo", debugPoly = false})
         clothingCombo:onPlayerInOut(function(isPointInside, _, zone)
             if isPointInside then
