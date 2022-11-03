@@ -873,12 +873,8 @@ RegisterNUICallback('rotateCam', function(data, cb)
     local coords = GetOffsetFromEntityInWorldCoords(ped, 0, 2.0, 0)
     if rotType == "left" then
         SetEntityHeading(ped, GetEntityHeading(ped) - 10)
-        SetCamCoord(cam, coords.x, coords.y, coords.z + 0.5)
-        SetCamRot(cam, 0.0, 0.0, GetEntityHeading(ped) + 180)
     else
         SetEntityHeading(ped, GetEntityHeading(ped) + 10)
-        SetCamCoord(cam, coords.x, coords.y, coords.z + 0.5)
-        SetCamRot(cam, 0.0, 0.0, GetEntityHeading(ped) + 180)
     end
     cb('ok')
 end)
@@ -2108,3 +2104,19 @@ function reloadSkin(health)
     Citizen.Wait(1000) -- Safety Delay
     SetEntityHealth(PlayerPedId(), health)
 end
+
+RegisterNUICallback('rotateRightChar', function(_, cb)
+    local ped = PlayerPedId()
+    local coords = GetOffsetFromEntityInWorldCoords(ped, 0, 2.0, 0)
+    SetEntityHeading(ped, GetEntityHeading(ped) + 10)
+    cb('ok')
+end)
+
+RegisterNUICallback('rotateLeftChar', function(_, cb)
+    local ped = PlayerPedId()
+    local coords = GetOffsetFromEntityInWorldCoords(ped, 0, 2.0, 0)
+    SetEntityHeading(ped, GetEntityHeading(ped) - 10)
+    cb('ok')
+end)
+
+--        SetEntityHeading(ped, GetEntityHeading(ped) - 10)

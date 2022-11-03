@@ -612,116 +612,30 @@ QBClothing.SetCurrentValues = function(clothingValues) {
     });
 }
 
-let ScreenPosition = null;
-let mousePos;
-let ScrollTimeout = false;
-let mouseIsDown = false;
-
-let direction = "", oldx = 0
-
-
-function getMouseWheelDirection(e) {
-    let delta = null, direction = false;
-    if (!e) { e = window.event; }
-    if ( e.wheelDelta ) {
-        delta = e.wheelDelta / 60;
-    } else if ( e.detail ) {
-        delta = -e.detail / 2;
-    }
-    if (delta !== null) {
-        direction = delta > 0 ? 'up' : 'down';
-    }
-    return direction;
-}
-
-function getMouseMovement(e) {
-    if (mouseIsDown) {
-        if(e.clientY <= 50 || e.clientX <= 50 || (e.clientX >= window.innerWidth || e.clientY >= window.innerHeight)) {
-            mouseIsDown = false;
-        }
-        if (e.pageX < oldx) {
-            $.post('https://qb-clothing/rotateCam', JSON.stringify({
-                type: "left"
-            }))
-        } else if (e.pageX > oldx) {
-            $.post('https://qb-clothing/rotateCam', JSON.stringify({
-            type: "right"
-            }))
-        }    
-        oldx = e.pageX;
-    }
-}
-
 $(document).ready(function() {
-    // Character Zoom
-    document.onmousewheel = function(e) {
-        let Direction = getMouseWheelDirection(e);
-        if (Direction) {
-            if (Direction == "up") {
-                if ($('#rotate-box').is(":hover")) {
-                    $.post(`https://${GetParentResourceName()}/zoomIn`, JSON.stringify({
-                        position: ScreenPosition
-                    }));
-                }
-            } else if (Direction == "down") {
-                if ($('#rotate-box').is(":hover")) {
-                    $.post(`https://${GetParentResourceName()}/zoomOut`, JSON.stringify({
-                        position: ScreenPosition
-                    }));
-                }
+    var mX = 0;
+    $('#rotate-box').mousedown(function (e) {
+        $(document).mousemove(function(e) {
+  
+            // moving upward
+            if (e.pageX < mX) {
+                    if($("#rotate-box:hover").length != 0){
+                        $.post('https://qb-clothing/rotateLeftChar');
+                    }
+                 // moving downward
+            } else {
+                    if($("#rotate-box:hover").length != 0){
+                        $.post('https://qb-clothing/rotateRightChar');
+                    }
             }
-        }
-    };
-
-    $('.clothing-character-rotate').on('mouseleave', (e) => {
-        mouseIsDown = false;
+      
+            // set new mY after doing test above
+            mX = e.pageX
+        });
     });
-
-    $('.clothing-character-rotate').on('mousedown', (e) => {
-        mouseIsDown = true;
+    $(document).mouseup(function() {
+        $(document).off("mousemove");
     });
+  });
 
-    $('.clothing-character-rotate').on('mouseup', (e) => {
-        mouseIsDown = false;
-    });
 
-    $('.clothing-character-rotate').on('mousemove', getMouseMovement);
-
-    document.onmousemove = handleMouseMove;
-    setInterval(getMousePosition, 100); // setInterval repeats every X ms
-
-    function handleMouseMove(event) {
-        let eventDoc, doc, body;
-        event = event || window.event; // IE-ism
-        if (event.pageX == null && event.clientX != null) {
-            eventDoc = (event.target && event.target.ownerDocument) || document;
-            doc = eventDoc.documentElement;
-            body = eventDoc.body;
-
-            event.pageX = event.clientX +
-              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-              (doc && doc.clientLeft || body && body.clientLeft || 0);
-            event.pageY = event.clientY +
-              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-              (doc && doc.clientTop  || body && body.clientTop  || 0 );
-        }
-        mousePos = {
-            x: event.pageX,
-            y: event.pageY
-        };
-    }
-
-    function getMousePosition() {
-        var pos = mousePos;
-        if (!pos) { return;}
-        else {
-            if (pos.y > 0 && pos.y < 550) {
-                ScreenPosition = "top";
-            } else if (pos.y > 550 && pos.y < 800) {
-                ScreenPosition = "middle";
-            } else if (pos.y > 800 && pos.y < 1000) {
-                ScreenPosition = "bottom";
-            }
-        }
-    }
-});
