@@ -481,6 +481,7 @@ else
             })
         end
 
+
         local clothingCombo = ComboZone:Create(zones, {name = "clothingCombo", debugPoly = false})
         clothingCombo:onPlayerInOut(function(isPointInside, _, zone)
             if isPointInside then
@@ -855,7 +856,7 @@ function enableCam()
         cam = CreateCam('DEFAULT_SCRIPTED_CAMERA', true)
         SetCamActive(cam, true)
         RenderScriptCams(true, false, 0, true, true)
-        SetCamCoord(cam, coords.x, coords.y, coords.z + 0.2)
+        SetCamCoord(cam, coords.x, coords.y, coords.z + 0.58)
         SetCamRot(cam, 0.0, 0.0, GetEntityHeading(PlayerPedId()) + 180)
     end
 
@@ -865,6 +866,17 @@ function enableCam()
 
     headingToCam = GetEntityHeading(PlayerPedId()) + 90
     camOffset = 2.0
+    
+    SetCamUseShallowDofMode(cam, true) -- Depth of field Settings DOF
+    SetCamNearDof(cam, 1.0)
+    SetCamFarDof(cam, 2.0)
+    SetCamDofStrength(cam, 0.6)
+    SetCamFov(cam, 20.0)
+
+    while DoesCamExist(cam) do
+	    SetUseHiDof()
+	    Citizen.Wait(0)
+    end
 end
 
 RegisterNUICallback('rotateCam', function(data, cb)
@@ -879,32 +891,6 @@ RegisterNUICallback('rotateCam', function(data, cb)
     cb('ok')
 end)
 
-RegisterNUICallback('setupCam', function(data, cb)
-    local value = data.value
-    local pedPos = GetEntityCoords(PlayerPedId())
-    if value == 1 then
-        camOffset = 0.75
-        local cx, cy = GetPositionByRelativeHeading(PlayerPedId(), headingToCam, camOffset)
-        SetCamCoord(cam, cx, cy, pedPos.z + 0.65)
-        PointCamAtCoord(cam, pedPos.x, pedPos.y, pedPos.z + 0.65)
-    elseif value == 2 then
-        camOffset = 1.0
-        local cx, cy = GetPositionByRelativeHeading(PlayerPedId(), headingToCam, camOffset)
-        SetCamCoord(cam, cx, cy, pedPos.z + 0.2)
-        PointCamAtCoord(cam, pedPos.x, pedPos.y, pedPos.z + 0.2)
-    elseif value == 3 then
-        camOffset = 1.0
-        local cx, cy = GetPositionByRelativeHeading(PlayerPedId(), headingToCam, camOffset)
-        SetCamCoord(cam, cx, cy, pedPos.z + -0.5)
-        PointCamAtCoord(cam, pedPos.x, pedPos.y, pedPos.z + -0.5)
-    else
-        camOffset = 2.0
-        local cx, cy = GetPositionByRelativeHeading(PlayerPedId(), headingToCam, camOffset)
-        SetCamCoord(cam, cx, cy, pedPos.z + 0.2)
-        PointCamAtCoord(cam, pedPos.x, pedPos.y, pedPos.z + 0.2)
-    end
-    cb('ok')
-end)
 
 function disableCam()
     RenderScriptCams(false, true, 250, 1, 0)
@@ -2108,15 +2094,64 @@ end
 RegisterNUICallback('rotateRightChar', function(_, cb)
     local ped = PlayerPedId()
     local coords = GetOffsetFromEntityInWorldCoords(ped, 0, 2.0, 0)
-    SetEntityHeading(ped, GetEntityHeading(ped) + 10)
+    SetEntityHeading(ped, GetEntityHeading(ped) + 5)
     cb('ok')
 end)
 
 RegisterNUICallback('rotateLeftChar', function(_, cb)
     local ped = PlayerPedId()
     local coords = GetOffsetFromEntityInWorldCoords(ped, 0, 2.0, 0)
-    SetEntityHeading(ped, GetEntityHeading(ped) - 10)
+    SetEntityHeading(ped, GetEntityHeading(ped) - 5)
     cb('ok')
 end)
 
---        SetEntityHeading(ped, GetEntityHeading(ped) - 10)
+RegisterNUICallback('fovup', function(_, cb)
+    local camfov = GetCamFov(cam)
+    SetCamFov(cam, camfov - 5)
+    cb('ok')
+end)
+
+RegisterNUICallback('fovdown', function(_, cb)
+    local camfov = GetCamFov(cam)
+    SetCamFov(cam, camfov + 5)
+    cb('ok')
+end)
+
+RegisterNUICallback('CamUp', function(_, cb)
+    local ped = PlayerPedId()
+    local pedPos = GetEntityCoords(PlayerPedId())
+    local cx, cy = GetPositionByRelativeHeading(PlayerPedId(), headingToCam, camOffset)
+    SetCamCoord(cam, cx, cy, pedPos.z + 0.58)
+    PointCamAtCoord(cam, pedPos.x, pedPos.y, pedPos.z + 0.58)
+    cb('ok')
+end)
+
+RegisterNUICallback('CamDown', function(_, cb)
+    local ped = PlayerPedId()
+    local pedPos = GetEntityCoords(PlayerPedId())
+    local cx, cy = GetPositionByRelativeHeading(PlayerPedId(), headingToCam, camOffset)
+    SetCamCoord(cam, cx, cy, pedPos.z - 0.50)
+    PointCamAtCoord(cam, pedPos.x, pedPos.y, pedPos.z - 0.50)
+    cb('ok')
+end)
+
+RegisterNUICallback('setupCam', function(data, cb)
+    local value = data.value
+    local pedPos = GetEntityCoords(PlayerPedId())
+    if value == 1 then
+        ExecuteCommand("hat")
+    elseif value == 2 then
+        ExecuteCommand("mask")
+    elseif value == 3 then
+        ExecuteCommand("glasses")
+    elseif value == 4 then
+        ExecuteCommand("shirt")
+    elseif value == 5 then
+        ExecuteCommand("bag")
+    elseif value == 6 then
+        ExecuteCommand("vest")
+    elseif value == 7 then
+        ExecuteCommand("shoes")
+    end
+    cb('ok')
+end)

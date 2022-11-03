@@ -303,6 +303,12 @@ $(document).on('keydown', function() {
         case 65: // A
             $.post('https://qb-clothing/rotateLeft');
             break;
+        case 87: // W
+            $.post('https://qb-clothing/CamUp');
+            break;
+        case 83: // S
+            $.post('https://qb-clothing/CamDown');
+            break;            
     }
 });
 
@@ -382,6 +388,7 @@ QBClothing.Open = function(data) {
 
     $(".change-camera-buttons").css("display", "grid");
     $(".change-camera-buttons-2").css("display", "grid");
+    $(".info-btn").css("display", "grid");
 
     $(".clothing-menu-roomOutfits-container").css("display", "none");
     $(".clothing-menu-myOutfits-container").css("display", "none");
@@ -477,6 +484,7 @@ QBClothing.Close = function() {
     $.post('https://qb-clothing/close');
     $(".change-camera-buttons").css("display", "none");
     $(".change-camera-buttons-2").css("display", "none");
+    $(".info-btn").css("display", "none");
     $(".clothing-menu-roomOutfits-container").css("display", "none");
     $(".clothing-menu-myOutfits-container").css("display", "none");
     $(".clothing-menu-character-container").css("display", "none");
@@ -549,6 +557,7 @@ $(document).on('click', '#save-outfit', function(e){
     });
     $(".change-camera-buttons").css({"display":"none"});
     $(".change-camera-buttons-2").css({"display": "none"});
+    $(".info-btn").css("display", "none");
     $(".clothing-menu-save-outfit-name").fadeIn(150);
 });
 
@@ -559,6 +568,7 @@ $(document).on('click', '#save-outfit-save', function(e){
     $(".clothing-menu-save-outfit-name").fadeOut(150);
     $(".change-camera-buttons").css({"display":"grid"});
     $(".change-camera-buttons-2").css({"display": "grid"});
+    $(".info-btn").css("display", "grid");
 
     $.post('https://qb-clothing/saveOutfit', JSON.stringify({
         outfitName: $("#outfit-name").val()
@@ -570,6 +580,7 @@ $(document).on('click', '#cancel-outfit-save', function(e){
     $(".clothing-menu-container").css({"display":"block"}).animate({right: 0,}, 200);
     $(".change-camera-buttons").css({"display":"grid"});
     $(".change-camera-buttons-2").css({"display": "grid"});
+    $(".info-btn").css("display", "grid");
 
     $(".clothing-menu-save-outfit-name").fadeOut(150);
 });
@@ -614,28 +625,47 @@ QBClothing.SetCurrentValues = function(clothingValues) {
 
 $(document).ready(function() {
     var mX = 0;
-    $('#rotate-box').mousedown(function (e) {
+    var mY = 0;
+    $('#rotate-char').mousedown(function (e) {
         $(document).mousemove(function(e) {
   
-            // moving upward
+            // moving character left
             if (e.pageX < mX) {
-                    if($("#rotate-box:hover").length != 0){
+                    if($("#rotate-char:hover").length != 0){
                         $.post('https://qb-clothing/rotateLeftChar');
                     }
-                 // moving downward
+                 // moving character right
             } else {
-                    if($("#rotate-box:hover").length != 0){
+                    if($("#rotate-char:hover").length != 0){
                         $.post('https://qb-clothing/rotateRightChar');
                     }
             }
-      
-            // set new mY after doing test above
             mX = e.pageX
         });
     });
     $(document).mouseup(function() {
         $(document).off("mousemove");
     });
-  });
+});
+
+$(document).ready(function() {
+    $('#rotate-char').bind('mousewheel', function(e){
+        if(e.originalEvent.wheelDelta /120 > 0) {
+            // console.log('scrolling up !');
+            $.post('https://qb-clothing/fovup');
+        }
+        else{
+            // console.log('scrolling down !');
+            $.post('https://qb-clothing/fovdown');
+        }
+    });
+});
 
 
+$(document).ready(function(){
+	$('#info').hover(function(){ 
+    	$(".info-text").show();
+	}, function(){
+        $(".info-text").hide();
+    });
+});

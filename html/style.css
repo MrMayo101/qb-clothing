@@ -61,7 +61,7 @@
 }
 
 .clothing-menu-header-btn:hover {
-    background-color: #283338;
+    background-color: #232A37;
 }
 
 #cool {
@@ -320,29 +320,29 @@
 .clothing-menu-option-item-left {
     position: absolute;
     bottom: 0.8vh;
-    left: 0;
-    height: 3.5vh;
+    left: 0px;
+    height: 3.4vh;
     width: 3.8vh;
-    background-color: #ffffff;
-    color: #384557;
+    background-color: rgb(255, 255, 255);
+    color: rgb(56, 69, 87);
     text-align: center;
-    line-height: 4vh;
+    line-height: 3.8vh;
     border-radius: 4px 0px 0px 4px;
-    transition: all 0.1s linear;
+    transition: all 0.1s linear 0s;
 }
 
 .clothing-menu-option-item-right {
     position: absolute;
     bottom: 0.8vh;
-    right: 0;
-    height: 3.5vh;
+    right: 0px;
+    height: 3.4vh;
     width: 3.8vh;
-    background-color: #ffffff;
-    color: #384557;
+    background-color: rgb(255, 255, 255);
+    color: rgb(56, 69, 87);
     text-align: center;
-    line-height: 4vh;
+    line-height: 3.8vh;
     border-radius: 0px 4px 4px 0px;
-    transition: all 0.1s linear;
+    transition: all 0.1s linear 0s;
 }
 
 
@@ -433,13 +433,13 @@
 }
 
 .clothing-menu-option-button > p {
-    line-height: 2.8vh;
+    line-height: 32px;
     font-size: 0.9vh;
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     letter-spacing: 0.1vh;
     text-transform: uppercase;
-    color: #2d3746;
+    color: rgb(45, 55, 70);
     text-align: center;
 }
 
@@ -483,12 +483,13 @@
 }
 
 .clothing-menu-save-outfit-name-button > p {
-    font-family: "Poppins", sans-serif !important;
-    font-size: 1.25vh;
+    font-size: 14px;
     letter-spacing: 0.1vh;
     text-transform: uppercase;
-    color: #212832;
+    color: rgb(33, 40, 50);
     font-weight: 600;
+    font-family: Poppins, sans-serif !important;
+    line-height: 27px;
 }
 
 .clothing-menu-save-outfit-name-header {
@@ -519,7 +520,7 @@
     border: none;
     outline: none;
     background: #212832;
-    width: 70%;
+    width: 300px;
     text-align: left;
     border-bottom: 2px solid #cccccc;
     transition: all 0.1s linear;
@@ -709,3 +710,62 @@ input::placeholder {
     width: 85%;
     cursor: ew-resize;
 }
+
+.info-btn {
+    position: absolute;
+    margin: 0 auto;
+    /* left: 10vh; */
+    right: 45.5vh;
+    height: auto;
+    width: auto;
+    /* top: 5px; */
+    bottom: 10px;
+    display: none;
+}
+
+.info-text {
+    margin: 10px;
+    background: #171C24;
+    padding: 10px;
+    color: white;
+    width: 300px;
+    font-size: 15px;
+    bottom: 39px;
+    position: absolute;
+    right: 481px;
+    border-radius: 4px;
+    display: none;
+}
+
+.md-ripples {
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+ }
+ 
+ .ripples-light .ripple {
+    background-color: #fff;
+ }
+ 
+ .ripples-dark .ripple {
+    background-color: #000;
+ }
+ 
+ .ripple {
+    background-color: #000;
+    opacity: 0.16;
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: ripple 0.3s ease-out;
+ }
+ 
+ @keyframes ripple {
+    from {
+      transform: scale(0);
+   }
+    to {
+      transform: scale(1);
+   }
+ }
+ 
+ 
