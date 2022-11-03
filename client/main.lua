@@ -866,17 +866,8 @@ function enableCam()
 
     headingToCam = GetEntityHeading(PlayerPedId()) + 90
     camOffset = 2.0
-    
-    SetCamUseShallowDofMode(cam, true) -- Depth of field Settings DOF
-    SetCamNearDof(cam, 1.0)
-    SetCamFarDof(cam, 2.0)
-    SetCamDofStrength(cam, 0.6)
-    SetCamFov(cam, 20.0)
 
-    while DoesCamExist(cam) do
-	    SetUseHiDof()
-	    Citizen.Wait(0)
-    end
+	Citizen.Wait(0)
 end
 
 RegisterNUICallback('rotateCam', function(data, cb)
