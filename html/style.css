@@ -160,7 +160,6 @@
     top: 4.5vh;
     background-color: #51637D;
     transition: all 0.1s linear;
-    border-radius: 10px;
 }
 
 .clothing-menu-outfit-option-button:hover {
@@ -173,7 +172,7 @@
     text-transform: uppercase;
     font-family: 'Inter', sans-serif;
     letter-spacing: 0.1vh;
-    font-size: 1vh;
+    font-size: 1.5vh;
 }
 
 .clothing-menu-myOutfit-option-button {

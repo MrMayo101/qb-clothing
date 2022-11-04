@@ -426,7 +426,7 @@ QBClothing.Open = function(data) {
 
         if (menu.menu == "roomOutfits") {
             $.each(menu.outfits, function(index, outfit) {
-                var elem = '<div class="clothing-menu-option" data-outfit="' + (index + 1) + '"> <div class="clothing-menu-option-header"><p>' + outfit.outfitLabel + '</p></div> <div class="clothing-menu-outfit-option-button"><p>Select Outfit</p></div> </div>'
+                var elem = '<div class="clothing-menu-option" data-outfit="' + (index + 1) + '"> <div class="clothing-menu-option-header"><p>' + outfit.outfitLabel + '</p></div> <div class="clothing-menu-outfit-option-button"><p>Select</p></div> </div>'
                 $(".clothing-menu-roomOutfits-container").append(elem)
 
                 $("[data-outfit='" + (index + 1) + "']").data('outfitData', outfit)
