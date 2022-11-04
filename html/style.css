@@ -58,6 +58,9 @@
     border-bottom: 2px solid rgba(255, 255, 255, 0);
     transition: all 0.1s linear;
     font-size: 3vh;
+    width: 100%!important;
+    font-size: 33px;
+    line-height: 61px;
 }
 
 .clothing-menu-header-btn:hover {
@@ -78,9 +81,8 @@
     font-family: 'Inter', sans-serif;
     text-transform: capitalize;
     font-weight: bold;
-    font-size: 1.1vh;
-    letter-spacing: 0.1vh;
-    line-height: 4.7vh;
+    font-size: 35px;
+    line-height: 68px;
 }
 
 .clothing-menu-header-cameras {
@@ -735,35 +737,5 @@ input::placeholder {
     display: none;
 }
 
-.md-ripples {
-    overflow: hidden;
-    -webkit-tap-highlight-color: transparent;
- }
- 
- .ripples-light .ripple {
-    background-color: #fff;
- }
- 
- .ripples-dark .ripple {
-    background-color: #000;
- }
- 
- .ripple {
-    background-color: #000;
-    opacity: 0.16;
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    animation: ripple 0.3s ease-out;
- }
- 
- @keyframes ripple {
-    from {
-      transform: scale(0);
-   }
-    to {
-      transform: scale(1);
-   }
- }
  
  

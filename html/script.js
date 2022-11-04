@@ -377,6 +377,7 @@ QBClothing.SetCurrentValues = function(clothingValues) {
     });
 }
 
+
 QBClothing.Open = function(data) {
     clothingCategorys = data.currentClothing;
 
@@ -386,26 +387,30 @@ QBClothing.Open = function(data) {
         hasTracker = false;
     }
 
+    $(".change-camera-buttons").fadeIn(150);
+
     $(".change-camera-buttons").css("display", "grid");
     $(".change-camera-buttons-2").css("display", "grid");
     $(".info-btn").css("display", "grid");
+
+    $(".clothing-menu-header-btn").css("width", "100%");
 
     $(".clothing-menu-roomOutfits-container").css("display", "none");
     $(".clothing-menu-myOutfits-container").css("display", "none");
     $(".clothing-menu-character-container").css("display", "none");
     $(".clothing-menu-clothing-container").css("display", "none");
     $(".clothing-menu-accessoires-container").css("display", "none");
-    $(".clothing-menu-container").css({"display":"block"}).animate({right: 0,}, 200);
+    $(".clothing-menu-container").css({ "display": "block" }).animate({ right: 0, }, 200);
     QBClothing.SetMaxValues(data.maxValues);
-    $(".clothing-menu-header").css("display", "grid");
+    $(".clothing-menu-header").html("");
     QBClothing.SetCurrentValues(data.currentClothing);
     $(".clothing-menu-roomOutfits-container").html("");
     $(".clothing-menu-myOutfits-container").html("");
-    $.each(data.menus, function(i, menu){
+    $.each(data.menus, function(i, menu) {
         if (menu.selected) {
-            $(".clothing-menu-header").append('<div class="clothing-menu-header-btn '+menu.menu+'Tab selected" data-category="'+menu.menu+'"><i class="fa-solid fa-shirt"></i></div>')
-            $(".clothing-menu-"+menu.menu+"-container").css({"display":"block"});
-            
+            $(".clothing-menu-header").append('<div class="clothing-menu-header-btn ' + menu.menu + 'Tab selected" data-category="' + menu.menu + '"><p>' + menu.label + '</p></div>')
+            $(".clothing-menu-" + menu.menu + "-container").css({ "display": "block" });
+
             if (menu.label == "Clothing") {
                 $("#faceoption").css("display", "none");
             } else {
@@ -415,14 +420,9 @@ QBClothing.Open = function(data) {
             selectedTab = "." + menu.menu + "Tab";
             lastCategory = menu.menu;
 
-        } else if (menu.menu == "accessoires") {
-            $(".clothing-menu-header").append('<div class="clothing-menu-header-btn accessoiresTab" data-category="accessoires"><i class="fa-solid fa-vest-patches"></i></div>')
-        } else if (menu.menu == "character") {
-            $(".clothing-menu-header").append('<div class="clothing-menu-header-btn characterTab" data-category="character"><i class="fa-solid fa-user-tie"></i></div>')
-        } else if (menu.menu == "clothing") {
-            $(".clothing-menu-header").append('<div class="clothing-menu-header-btn clothingTab" data-category="clothing"><i class="fa-solid fa-face-smile"></i></div>')
+        } else {
+            $(".clothing-menu-header").append('<div class="clothing-menu-header-btn ' + menu.menu + 'Tab" data-category="' + menu.menu + '"><p>' + menu.label + '</p></div>')
         }
-        
 
         if (menu.menu == "roomOutfits") {
             $.each(menu.outfits, function(index, outfit) {
@@ -443,6 +443,9 @@ QBClothing.Open = function(data) {
         }
     });
 
+    var menuWidth = (100 / data.menus.length)
+
+    $(".clothing-menu-header-btn").css("width", menuWidth + "%");
 }
 
 $(document).on('click', '.clothing-menu-outfit-option-button', function(e){
@@ -512,8 +515,8 @@ QBClothing.SetMaxValues = function(maxValues) {
             $(itemMax).data('maxItem', maxValues[containers.data('type')].item)
             $(headerMax).data('maxTexture', maxValues[containers.data('type')].texture)
     
-            $(itemMax).html("<p>Artikel: " + maxValues[containers.data('type')].item + "</p>")
-            $(headerMax).html("<p>Färg: " + maxValues[containers.data('type')].texture + "</p>")
+            $(itemMax).html("<p>Components: " + maxValues[containers.data('type')].item + "</p>")
+            $(headerMax).html("<p>Color: " + maxValues[containers.data('type')].texture + "</p>")
         } else if (cat.type == "hair") {
             var containers = $(".clothing-menu-clothing-container").find('[data-type="'+i+'"]');
             var itemMax = $(containers).find('[data-headertype="item-header"]');
@@ -522,8 +525,8 @@ QBClothing.SetMaxValues = function(maxValues) {
             $(itemMax).data('maxItem', maxValues[containers.data('type')].item)
             $(headerMax).data('maxTexture', maxValues[containers.data('type')].texture)
     
-            $(itemMax).html("<p>Artikel: " + maxValues[containers.data('type')].item + "</p>")
-            $(headerMax).html("<p>Färg: " + maxValues[containers.data('type')].texture + "</p>")
+            $(itemMax).html("<p>Components: " + maxValues[containers.data('type')].item + "</p>")
+            $(headerMax).html("<p>Color: " + maxValues[containers.data('type')].texture + "</p>")
         } else if (cat.type == "accessoires") {
             var containers = $(".clothing-menu-accessoires-container").find('[data-type="'+i+'"]');
             var itemMax = $(containers).find('[data-headertype="item-header"]');
@@ -532,8 +535,8 @@ QBClothing.SetMaxValues = function(maxValues) {
             $(itemMax).data('maxItem', maxValues[containers.data('type')].item)
             $(headerMax).data('maxTexture', maxValues[containers.data('type')].texture)
     
-            $(itemMax).html("<p>Artikel: " + maxValues[containers.data('type')].item + "</p>")
-            $(headerMax).html("<p>Färg: " + maxValues[containers.data('type')].texture + "</p>")
+            $(itemMax).html("<p>Components: " + maxValues[containers.data('type')].item + "</p>")
+            $(headerMax).html("<p>Color: " + maxValues[containers.data('type')].texture + "</p>")
         }
     })
 }

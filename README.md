@@ -5,6 +5,7 @@ Jokes aside this is a Nopixel inspired css edit of qb-clothing with some new fea
 Thanks to QBCore for an pretty good clothing menu from the start and shoutout to Nopixel, They are too awesome.
 
 U can disable the Depth of field by deleting "SetUseHiDof()" in Main.lua:877
+-- DOF Currently disabled due to problems with saving --
 
 My Mapping/dev discord https://discord.gg/8SUJN7JXk2
 

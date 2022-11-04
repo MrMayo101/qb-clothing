@@ -365,10 +365,10 @@ RegisterNetEvent('qb-clothing:client:getOutfits', function(requiredJob, gradeLev
     if QBCore.Functions.GetPlayerData().charinfo.gender == 1 then gender = "female" end
     QBCore.Functions.TriggerCallback('qb-clothing:server:getOutfits', function(result)
         openMenu({
-            {menu = "roomOutfits", label = "Presets", selected = true, outfits = Config.Outfits[requiredJob][gender][gradeLevel]},
-            {menu = "myOutfits", label = "My Outfits", selected = false, outfits = result},
-            {menu = "character", label = "Clothing", selected = false},
-            {menu = "accessoires", label = "Accessories", selected = false}
+            {menu = "roomOutfits", label = '<i class="fa-solid fa-user-tie"></i>', selected = true, outfits = Config.Outfits[requiredJob][gender][gradeLevel]},
+            {menu = "myOutfits", label = '<i class="fa-solid fa-user"></i>', selected = false, outfits = result},
+            {menu = "character", label = '<i class="fa-solid fa-shirt"></i>', selected = false},
+            {menu = "accessoires", label = '<i class="fa-solid fa-vest-patches"></i>', selected = false}
         })
     end)
 end)
@@ -383,7 +383,7 @@ if Config.UseTarget then
                     action = function()
                         customCamLocation = nil
                         openMenu({
-                            {menu = "clothing", label = "Hair", selected = true},
+                            {menu = "clothing", label = '<i class="fa-solid fa-scissors"></i>', selected = true},
                         })
                     end,
                     icon = "fas fa-chair-office",
@@ -394,8 +394,8 @@ if Config.UseTarget then
                     action = function()
                         customCamLocation = nil
                         openMenu({
-                            {menu = "character", label = "Clothing", selected = true},
-                            {menu = "accessoires", label = "Accessories", selected = false}
+                            {menu = "character", label = '<i class="fa-solid fa-shirt"></i>', selected = true},
+                            {menu = "accessoires", label = '<i class="fa-solid fa-vest-patches"></i>', selected = false}
                         })
                     end,
                     icon = "fas fa-clothes-hanger",
@@ -406,7 +406,7 @@ if Config.UseTarget then
                     action = function()
                         customCamLocation = nil
                         openMenu({
-                            {menu = "clothing", label = "Features", selected = true},
+                            {menu = "clothing", label = '<i class="fa-solid fa-scissors"></i>', selected = true},
                         })
                     end,
                     icon = "fas fa-scalpel",
@@ -459,7 +459,7 @@ if Config.UseTarget then
                         type = "client",
                         action = action,
                         icon = "fas fa-sign-in-alt",
-                        label = "Clothing",
+                        label = '<i class="fa-solid fa-shirt"></i>',
                         job = v.requiredJob
                     },
                 },
@@ -538,22 +538,22 @@ else
                     if IsControlJustReleased(0, 38) then
                         customCamLocation = nil
                         openMenu({
-                            {menu = "clothing", label = "Features", selected = true},
+                            {menu = "clothing", label = '<i class="fa-solid fa-scissors"></i>', selected = true},
                         })
                     end
                 elseif zoneName == 'clothing' then
                     if IsControlJustReleased(0, 38) then
                         customCamLocation = nil
                         openMenu({
-                            {menu = "character", label = "Clothing", selected = true},
-                            {menu = "accessoires", label = "Accessories", selected = false}
+                            {menu = "character", label = '<i class="fa-solid fa-shirt"></i>', selected = true},
+                            {menu = "accessoires", label = '<i class="fa-solid fa-vest-patches"></i>', selected = false}
                         })
                     end
                 elseif zoneName == 'barber' then
                     if IsControlJustReleased(0, 38) then
                         customCamLocation = nil
                         openMenu({
-                            {menu = "clothing", label = "Hair", selected = true},
+                            {menu = "clothing", label = '<i class="fa-solid fa-scissors"></i>', selected = true},
                         })
                     end
                 else
@@ -574,7 +574,7 @@ end
 RegisterNetEvent('qb-clothing:client:openOutfitMenu', function()
     QBCore.Functions.TriggerCallback('qb-clothing:server:getOutfits', function(result)
         openMenu({
-            {menu = "myOutfits", label = "My Outfits", selected = true, outfits = result},
+            {menu = "myOutfits", label = '<i class="fa-solid fa-user"></i>', selected = true, outfits = result},
         })
     end)
 end)
@@ -664,9 +664,9 @@ RegisterNetEvent('qb-clothing:client:openMenu')
 AddEventHandler('qb-clothing:client:openMenu', function()
     customCamLocation = nil
     openMenu({
-        {menu = "character", label = "Character", selected = true},
-        {menu = "clothing", label = "Features", selected = false},
-        {menu = "accessoires", label = "Accessories", selected = false}
+        {menu = "character", label = '<i class="fa-solid fa-user"></i>', selected = true},
+        {menu = "clothing", label = '<i class="fa-solid fa-scissors"></i>', selected = false},
+        {menu = "accessoires", label = '<i class="fa-solid fa-vest-patches"></i>', selected = false}
     })
 end)
 
@@ -1594,9 +1594,9 @@ AddEventHandler('qb-clothes:client:CreateFirstCharacter', function()
     QBCore.Functions.GetPlayerData(function(pData)
         local skin = "mp_m_freemode_01"
         openMenu({
-            {menu = "character", label = "Character", selected = true},
-            {menu = "clothing", label = "Features", selected = false},
-            {menu = "accessoires", label = "Accessories", selected = false}
+            {menu = "character", label = '<i class="fa-solid fa-user"></i>', selected = true},
+            {menu = "clothing", label = '<i class="fa-solid fa-scissors"></i>', selected = false},
+            {menu = "accessoires", label = '<i class="fa-solid fa-vest-patches"></i>', selected = false}
         })
 
         if pData.charinfo.gender == 1 then
