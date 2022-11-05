@@ -387,7 +387,7 @@ if Config.UseTarget then
                         })
                     end,
                     icon = "fas fa-chair-office",
-                    label = "Barber",
+                    label = "Barber Shop",
                 }
             elseif v.shopType == 'clothing' then
                 opts = {
@@ -398,7 +398,7 @@ if Config.UseTarget then
                             {menu = "accessoires", label = '<i class="fa-solid fa-vest-patches"></i>', selected = false}
                         })
                     end,
-                    icon = "fas fa-clothes-hanger",
+                    icon = "fas fa-shirt",
                     label = "Clothing Store",
                 }
             elseif v.shopType == 'surgeon' then
@@ -459,7 +459,7 @@ if Config.UseTarget then
                         type = "client",
                         action = action,
                         icon = "fas fa-sign-in-alt",
-                        label = '<i class="fa-solid fa-shirt"></i>',
+                        label = 'Use Job Locker',
                         job = v.requiredJob
                     },
                 },
